@@ -1,3 +1,11 @@
+# app.py
+# SQLite Version Fix - MUST BE FIRST
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+# Rest of your imports
+# ... rest of your existing code ...
 import streamlit as st
 from src.main import crew
 
