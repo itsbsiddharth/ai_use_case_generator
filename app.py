@@ -1,13 +1,18 @@
-# app.py
-# SQLite Version Fix - MUST BE FIRST
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# Add this at the VERY TOP of app.py
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    import sys
+    sys.modules['sqlite3'] = __import__('sqlite3')
+    pass  # Fallback to system sqlite3
 
-# Rest of your imports
-# ... rest of your existing code ...
+# Then your regular imports
 import streamlit as st
 from src.main import crew
+
+# Rest of your code...
 
 st.title("AI Use Case Generator")
 
